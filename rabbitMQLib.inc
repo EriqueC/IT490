@@ -163,7 +163,7 @@ class rabbitMQClient
 		
 		$body = $response->body;
 		$payload = json_decode($body);
-		var_dump($payload);
+		
 		if (!isset($payload)){
 			$payload = "[empty or invalid response]";
 		}
@@ -199,7 +199,7 @@ class rabbitMQClient
 				'reply_to' => $this->callback_queue)
 			);
 			
-			echo "sending message\n";
+			
 		
 			$this->channel->basic_publish($msg, '', $this->queue);
 			$this->response_queue[$uid] = "waiting";

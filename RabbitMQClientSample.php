@@ -10,11 +10,12 @@ if(isset($argv[1])){
 else{
 	$msg = array("message"=>"test message", "type"=>"echo");
 }
-
+echo  "Client sending request: <pre>" . var_export($msg, true) . "</pre>\n<br>";
 $response = $client->send_request($msg);
 
 echo "client received response: " . PHP_EOL;
-print_r($response);
+
+echo "<pre>".var_export($response, true) ."</pre";//pre for browser
 echo "\n\n";
 
 if(isset($argv[0]))
