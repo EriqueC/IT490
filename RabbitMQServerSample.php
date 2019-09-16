@@ -8,20 +8,28 @@ function login($user,$pass){
 	//TODO validate user credentials
 	return true;
 }
-
+function doEcho($req){
+	echo "doing echo\n";
+	$req['message'] = "Echo " . $req['message'];
+	return $req;
+}
 function request_processor($req){
 	echo "Received Request".PHP_EOL;
+	echo "Request[" . $req . "]\n<br>"; 
 	echo "<pre>" . var_dump($req) . "</pre>";
 	if(!isset($req['type'])){
-		return "Error: unsupported message type";
+		return __FILE__ . ".Error: unsupported message type";
 	}
 	//Handle message type
 	$type = $req['type'];
+	echo "Received type: " . $type;
 	switch($type){
 		case "login":
 			return login($req['username'], $req['password']);
 		case "validate_session":
 			return validate($req['session_id']);
+		case "echo":
+			return doEcho($req);
 	}
 	return array("return_code" => '0',
 		"message" => "Server received request and processed it");
